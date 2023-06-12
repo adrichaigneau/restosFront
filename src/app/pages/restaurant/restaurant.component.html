@@ -1,0 +1,67 @@
+<section class="d-flex">
+  <article>
+    <div></div>
+  </article>
+</section>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col align-self-start m-5">
+      <div class="card col-5" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{restaurant.nom}}
+          </h5>
+          <p class="card-text">
+          <h3 *ngIf="restaurant.type?.nom === 'Francais'; else elseBlock"> <i class="fa-solid fa-bowl-food"></i> &nbsp; Français</h3>
+          <ng-template #elseBlock>
+            <h3 *ngIf="restaurant.type?.nom === 'Coreen'; else elseBlock"> <i class="fa-solid fa-bowl-food"></i> &nbsp; Coréen</h3>
+            <ng-template #elseBlock> <i class="fa-solid fa-bowl-food"></i> &nbsp; {{restaurant.type?.nom}}</ng-template>
+          </ng-template>
+          <div>
+            <i class="fa-sharp fa-solid fa-location-dot"></i> &nbsp;
+            {{restaurant.adresse}}
+          </div>
+          <div>
+            <i class="fa-solid fa-phone"></i> &nbsp;
+            {{restaurant.tel}}
+          </div>
+          <div *ngIf="restaurant.prix?.categorie == 'e'">
+            <i class="fa-solid fa-euro-sign"></i>
+          </div>
+          <div *ngIf="restaurant.prix?.categorie == 'ee'">
+            <i class="fa-solid fa-euro-sign"></i>
+            <i class="fa-solid fa-euro-sign"></i>
+          </div>
+          <div *ngIf="restaurant.prix?.categorie == 'eee'">
+            <i class="fa-solid fa-euro-sign"></i>
+            <i class="fa-solid fa-euro-sign"></i>
+            <i class="fa-solid fa-euro-sign"></i>
+          </div>
+          <a class="btn btn-light text rounded-3 mt-3 button" [routerLink]="['/avisedit', restaurant.id]">Laisser un avis</a>
+        </div>
+      </div>
+      <div class="card text-bg-dark mb-3 mt-3" style="max-width: 18rem;" *ngFor="let a of avis">
+        <div class="card-header">{{a.theme?.nom}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Par {{a.surnom}} </h5>
+          <p class="card-text">"{{a.texte}}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card text-bg-dark mb-3 mt-3" style="max-width: 100rem;">
+<img [src]='image' alt=""/>
+</div>
+
+<div id="map"></div>
+
+
+
+<!--</div>
+      <iframe class="col" [src]="map" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>-->
